@@ -14,13 +14,14 @@ const medicines = [
   { id: 13, name: "Simvastatin", price: 28, source: "Bhopal", deliveryTime: "4 days", img: "images/simvastatin.jpg" },
   { id: 14, name: "Losartan", price: 32, source: "Indore", deliveryTime: "2 days", img: "images/losartan.jpg" },
   { id: 15, name: "Loratadine", price: 20, source: "Nagpur", deliveryTime: "3 days", img: "images/loratadine.jpg" },
-  {id: 16, name: "Albuterol", price: 35, source: "Surat", deliveryTime: "2 days", img: "images/albuterol.jpg"},
-  {id: 17, name: "Budesonide", price: 40, source: "Vadodara", deliveryTime: "1 day", img: "images/budesonide.jpg"},
-  {id: 18, name: "Diphenhydramine", price: 28, source: "Bhopal", deliveryTime: "4 days", img: "images/diphenhydramine.jpg"},
-
+  { id: 16, name: "Albuterol", price: 35, source: "Surat", deliveryTime: "2 days", img: "images/albuterol.jpg" },
+  { id: 17, name: "Budesonide", price: 40, source: "Vadodara", deliveryTime: "1 day", img: "images/budesonide.jpg" },
+  { id: 18, name: "Diphenhydramine", price: 28, source: "Bhopal", deliveryTime: "4 days", img: "images/diphenhydramine.jpg" },
 ];
 
 let cart = [];
+
+// Load medicines
 function loadMedicines(filteredMedicines = medicines) {
   const productContainer = document.querySelector('.product-container');
   productContainer.innerHTML = ''; // Clear previous content
@@ -41,7 +42,6 @@ function loadMedicines(filteredMedicines = medicines) {
     productContainer.appendChild(product);
   });
 }
-
 
 // Search medicines
 function searchMedicine() {
@@ -70,33 +70,56 @@ function addToCart(id) {
 }
 
 // Update cart display
+// Add cart banner HTML dynamically
 function updateCart() {
   const cartItemsContainer = document.getElementById('cart-items');
   const cartCount = document.getElementById('cart-count');
   const cartTotal = document.getElementById('cart-total');
 
+  // Clear existing cart items
   cartItemsContainer.innerHTML = '';
+
+  // Add banner to the cart
+  const cartBanner = `
+    <div class="cart-banner">
+      🛒 Your Shopping Cart
+    </div>
+  `;
+  cartItemsContainer.innerHTML += cartBanner;
+
   let total = 0;
 
+  // Add each cart item
   cart.forEach(item => {
     total += item.price * item.quantity;
     cartItemsContainer.innerHTML += `
       <div class="cart-item">
-        <h4>${item.name}</h4>
-        <p>Price: ₹${item.price}</p>
-        <p>Quantity: 
-          <button onclick="decreaseQuantity(${item.id})">-</button>
-          ${item.quantity}
-          <button onclick="increaseQuantity(${item.id})">+</button>
-        </p>
-        <p>Subtotal: ₹${item.price * item.quantity}</p>
+        <div class="cart-item-details">
+          <h4>${item.name}</h4>
+          <p>Price: ₹${item.price}</p>
+          <p>Quantity: 
+            <button onclick="decreaseQuantity(${item.id})">-</button>
+            ${item.quantity}
+            <button onclick="increaseQuantity(${item.id})">+</button>
+          </p>
+          <p>Subtotal: ₹${item.price * item.quantity}</p>
+        </div>
+        <img src="${item.img}" alt="${item.name}" class="cart-item-img">
       </div>
     `;
   });
 
+  // Update cart count and total
   cartCount.textContent = cart.length;
   cartTotal.textContent = total;
 }
+
+// Toggle cart visibility
+function toggleCart() {
+  const cartOverlay = document.getElementById('cart');
+  cartOverlay.classList.toggle('hidden');
+}
+
 
 // Increase quantity of a cart item
 function increaseQuantity(id) {
@@ -141,7 +164,5 @@ function checkout() {
 function scrollToProducts() {
   document.getElementById("product-list").scrollIntoView({ behavior: "smooth" });
 }
-
-
 
 loadMedicines();
