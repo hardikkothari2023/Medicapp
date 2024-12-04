@@ -193,6 +193,54 @@ body {
   margin-top: 0;
   color: #0073e6; /* Matches the header theme */
 }
+/* Notification styling */
+#notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.notification {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  background-color: #b7dcff; /* Success green */
+  color: white;
+  font-size: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translateX(100%);
+  animation: slide-in 0.5s forwards, fade-out 4s forwards;
+}
+
+.notification img {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+}
+
+/* Animation for sliding in and fading out */
+@keyframes slide-in {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+
 
 /* Cart Overlay */
 .cart-overlay {

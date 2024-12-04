@@ -8,6 +8,7 @@
   <script src="script1.js" defer></script>
 </head>
 <body>
+  <div id="notification-container"></div>
   <!-- Login Section -->
   <section class="login-section">
     <div class="login-container">
@@ -16,7 +17,11 @@
         <label for="mobile">Username</label>
         <input type="text" id="mobile" name="mobile" placeholder="Enter Username" required>
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+          <div class="password-container">
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <div class="lock-icon" onclick="togglePasswordVisibility()">🔒</div>
+          </div>
         <button type="submit">Login To Access</button>
       </form>
     </div>
@@ -25,7 +30,7 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>We Are Here To Secure Your Health By Aniket And Hardik </p>
+      <p>We Are Here To Secure Your Health By Pradhan Mantri Jan Aushadhi Kendra</p>
     </div>
   </footer>
 </body>
