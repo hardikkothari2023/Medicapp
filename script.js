@@ -87,7 +87,7 @@ function showNotification(message, imgSrc) {
   // Remove notification after 5 seconds
   setTimeout(() => {
     notification.remove();
-  }, 5000);
+  }, 2000);
 }
 
 // Update cart display
